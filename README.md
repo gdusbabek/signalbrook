@@ -9,10 +9,10 @@ The following algorithms are implemented:
 * Lossy Counting
 * Space Saving
 
-I didn't make any attempt to make choose efficient data structures.  
-I was primarily focused on getting the algorithms correct.
-The code is kind of messy and could do with some cleanup.  
-For example: φ and ε should be parameters to the `getFrequentItems()` and constructor methods.
+I didn't make an attempt to choose efficient data structures. There is room for improvement here.  I was primarily focused on getting the algorithms correct.
+
+The code is kind of messy and could do with some cleanup.  For example: φ and ε should be parameters to the 
+`getFrequentItems()` and constructor methods.
 
 The next step is to implement the quantile algorithms.  Maybe on another hack day.
 
