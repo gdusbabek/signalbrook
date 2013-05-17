@@ -6,4 +6,16 @@ algorithms.  I had a hack day coming up; this code is the product.
 I didn't make any attempt to make choose efficient data structures.  I was primarily focused on getting the algorithms
 correct.
 
+### Stream Interface
+
+It has just two methods:
+
+```java
+    Stream<Foo> stream = new YourStreamImplementation<Foo>(acceptableErrorDouble);
+    stream.observe(new Foo(...));
+    ...
+    List<Count> frequenItems = stream.getFrequentItems();
+```
+
+
 NOTE: My last math class was in 1999.
