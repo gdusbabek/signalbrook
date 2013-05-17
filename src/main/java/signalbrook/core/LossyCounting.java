@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicLong;
 
 public class LossyCounting<T> implements Stream<T> {
     private boolean over = false;
@@ -23,7 +22,7 @@ public class LossyCounting<T> implements Stream<T> {
     
     public void observe(T item) throws Exception {
         if (n == Long.MAX_VALUE) {
-            over = true;
+            throw new OverflowException("Overflowed " + Long.MAX_VALUE);
         } else {
             n += 1;
         }
@@ -63,10 +62,6 @@ public class LossyCounting<T> implements Stream<T> {
         }
         Collections.sort(list);
         return list;
-    }
-
-    public boolean hasOverflowed() {
-        return over;
     }
     
     private class Tuple {

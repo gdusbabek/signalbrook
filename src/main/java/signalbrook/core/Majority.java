@@ -1,19 +1,21 @@
 package signalbrook.core;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Only works on binary inputs (can be reduced to true/false).
  */
 public class Majority implements Stream<Boolean> {
     
-    private volatile long wraps = 0;
-    private volatile long n = 0;
-    private volatile boolean current = true;
-    private volatile long counter = 0;
+    private long n = 0;
+    private boolean current = true;
+    private long counter = 0;
     
-    public synchronized void observe(Boolean item) throws Exception {
+    public void observe(Boolean item) throws Exception {
         if (n == Long.MAX_VALUE) {
-            n = 0;
-            wraps += 1;
+            throw new OverflowException("Overflowed " + Long.MAX_VALUE);
         } else {
             n += 1;
         }
@@ -28,7 +30,7 @@ public class Majority implements Stream<Boolean> {
         }
     }
 
-    public synchronized long getFrequency(Boolean item) {
+    public long getFrequency(Boolean item) {
         // invariant: major + minor == n.
         // this is busted after overflow, btw.
         long major = n / 2;
@@ -40,11 +42,15 @@ public class Majority implements Stream<Boolean> {
         return current == item ? major : minor;
     }
     
-    public synchronized boolean isMajority(boolean b) {
+    public boolean isMajority(boolean b) {
         return current == b && counter > 0;
     }
 
-    public boolean hasOverflowed() {
-        return wraps > 0;
+    public List<Count> getFrequentItems() {
+        List<Count> list = new ArrayList<Count>(2);
+        list.add(new Count<Boolean>(Boolean.TRUE, getFrequency(Boolean.TRUE)));
+        list.add(new Count<Boolean>(Boolean.FALSE, getFrequency(Boolean.FALSE)));
+        Collections.sort(list);
+        return list;
     }
 }

@@ -21,7 +21,7 @@ public class Frequent<T> implements Stream<T> {
     
     public void observe(T item) throws Exception {
         if (n == Long.MAX_VALUE) {
-            over = true;
+            throw new OverflowException("Overflowed " + Long.MAX_VALUE);
         } else {
             n += 1;
         }
@@ -50,10 +50,6 @@ public class Frequent<T> implements Stream<T> {
                 }
             }
         }
-    }
-
-    public boolean hasOverflowed() {
-        return over;
     }
     
     public List<Count> getFrequentItems() {
