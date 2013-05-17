@@ -17,5 +17,7 @@ It has just two methods:
     List<Count> frequenItems = stream.getFrequentItems();
 ```
 
+`Foo` should have reasonable `hashCode()` and `equals()` implementations.
+
 
 NOTE: My last math class was in 1999.
