@@ -9,7 +9,7 @@ The following algorithms are implemented:
 * Lossy Counting
 * Space Saving
 
-I didn't make an attempt to choose efficient data structures. There is room for improvement here.  I was primarily focused on getting the algorithms correct.
+I didn't make an attempt to choose efficient data structures or ensure thread safety [in the `Stream.observe()` method]. There is room for improvement here.  I was primarily focused on getting the algorithms correct.
 
 The code is kind of messy and could do with some cleanup.  For example: φ and ε should be parameters to the 
 `getFrequentItems()` and constructor methods.
